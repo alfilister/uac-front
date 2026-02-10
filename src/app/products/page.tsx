@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { ExclamationCircleIcon } from '@heroicons/react/24/outline'
 import TableAccounts from '@/components/products/TableAccounts'
 import Filters from '@/components/products/Filters'
 import StatsCards from '@/components/products/StatsCards'
@@ -17,7 +18,6 @@ export default function ProductsPage() {
 			}}
 		>
 			<div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-				{/* Header */}
 				<div className="mb-8">
 					<h1
 						className="text-3xl font-bold sm:text-4xl"
@@ -31,16 +31,12 @@ export default function ProductsPage() {
 					</p>
 				</div>
 
-				{/* Stats Cards */}
 				<StatsCards />
 
-				{/* Filters */}
 				<Filters onSearchChange={setSearchTerm} onTypeChange={setAccountType} />
 
-				{/* Table */}
 				<TableAccounts searchTerm={searchTerm} accountTypeFilter={accountType} />
 
-				{/* Footer Info */}
 				<div
 					className="mt-6 rounded-lg p-4 border"
 					style={{
@@ -49,20 +45,7 @@ export default function ProductsPage() {
 					}}
 				>
 					<div className="flex items-start">
-						<svg
-							className="mt-0.5 h-5 w-5 shrink-0"
-							style={{ color: 'var(--secondary)' }}
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth={2}
-								d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-							/>
-						</svg>
+						<ExclamationCircleIcon className="mt-0.5 h-5 w-5 shrink-0 text-secondary" />
 						<div className="ml-3">
 							<p className="text-sm" style={{ color: 'var(--mainBg)' }}>
 								<strong className="font-semibold">Consejos:</strong> Haz clic en los
