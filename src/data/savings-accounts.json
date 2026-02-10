@@ -1,0 +1,139 @@
+[
+	{
+		"id": "ACC001",
+		"accountName": "Ahorro Dorado",
+		"accountType": "Cuenta de Ahorro Regular",
+		"balance": 50000000.0,
+		"currency": "COP",
+		"interestRate": 1.75,
+		"minAge": 18,
+		"minDeposit": 100000.0,
+		"status": "active"
+	},
+	{
+		"id": "ACC002",
+		"accountName": "Futuro Premium",
+		"accountType": "Cuenta de Ahorro Premium",
+		"balance": 15000000.0,
+		"currency": "COP",
+		"interestRate": 3.25,
+		"minAge": 25,
+		"minDeposit": 500000.0,
+		"status": "active"
+	},
+	{
+		"id": "ACC003",
+		"accountName": "Juventud Activa",
+		"accountType": "Cuenta Joven",
+		"balance": 25000000.0,
+		"currency": "COP",
+		"interestRate": 2.8,
+		"minAge": 18,
+		"maxAge": 30,
+		"minDeposit": 50000.0,
+		"status": "active"
+	},
+	{
+		"id": "ACC004",
+		"accountName": "Progreso Seguro",
+		"accountType": "Cuenta de Ahorro Regular",
+		"balance": 75000000.0,
+		"currency": "COP",
+		"interestRate": 1.9,
+		"minAge": 18,
+		"minDeposit": 1000000.0,
+		"status": "active"
+	},
+	{
+		"id": "ACC005",
+		"accountName": "Empresarial Global",
+		"accountType": "Cuenta de Ahorro Empresarial",
+		"balance": 500000.0,
+		"currency": "COP",
+		"interestRate": 4.2,
+		"minAge": 21,
+		"minDeposit": 1000.0,
+		"requiresBusinessRegistration": true,
+		"status": "active"
+	},
+	{
+		"id": "ACC006",
+		"accountName": "Elite Plus",
+		"accountType": "Cuenta de Ahorro Premium",
+		"balance": 2500000.0,
+		"currency": "COP",
+		"interestRate": 3.5,
+		"minAge": 30,
+		"minDeposit": 75000.0,
+		"status": "active"
+	},
+	{
+		"id": "ACC007",
+		"accountName": "Start Up",
+		"accountType": "Cuenta Joven",
+		"balance": 18000000.0,
+		"currency": "COP",
+		"interestRate": 2.5,
+		"minAge": 16,
+		"maxAge": 25,
+		"minDeposit": 250000.0,
+		"status": "active"
+	},
+	{
+		"id": "ACC008",
+		"accountName": "Crecimiento Constante",
+		"accountType": "Cuenta de Ahorro Regular",
+		"balance": 92000000.0,
+		"currency": "COP",
+		"interestRate": 2.1,
+		"minAge": 18,
+		"minDeposit": 1050000.0,
+		"status": "active"
+	},
+	{
+		"id": "ACC009",
+		"accountName": "Negocios Internacionales",
+		"accountType": "Cuenta de Ahorro Empresarial",
+		"balance": 7500000.0,
+		"currency": "COP",
+		"interestRate": 4.5,
+		"minAge": 21,
+		"minDeposit": 25000.0,
+		"requiresBusinessRegistration": true,
+		"status": "active"
+	},
+	{
+		"id": "ACC010",
+		"accountName": "VIP Select",
+		"accountType": "Cuenta de Ahorro Premium",
+		"balance": 30000000.0,
+		"currency": "COP",
+		"interestRate": 3.75,
+		"minAge": 35,
+		"minDeposit": 40000.0,
+		"status": "active"
+	},
+	{
+		"id": "ACC011",
+		"accountName": "Estabilidad Total",
+		"accountType": "Cuenta de Ahorro Regular",
+		"balance": 4500000.0,
+		"currency": "COP",
+		"interestRate": 1.65,
+		"minAge": 18,
+		"minDeposit": 200000.0,
+		"status": "active"
+	},
+	{
+		"id": "ACC012",
+		"accountName": "Universidad Dinero",
+		"accountType": "Cuenta Joven",
+		"balance": 3200000.0,
+		"currency": "COP",
+		"interestRate": 2.95,
+		"minAge": 18,
+		"maxAge": 28,
+		"minDeposit": 70500.0,
+		"status": "active"
+	}
+]
