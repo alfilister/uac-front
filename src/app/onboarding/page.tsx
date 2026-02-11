@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import Navbar from '@/components/Navbar'
 import SuccessMessage from '@/components/onboarding/SuccessMessage'
 import OnboardingForm from '@/components/onboarding/OnboardingForm'
@@ -79,14 +80,6 @@ export default function OnboardingPage() {
 		}
 	}
 
-	const generateUUID = () => {
-		return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-			const r = (Math.random() * 16) | 0
-			const v = c === 'x' ? r : (r & 0x3) | 0x8
-			return v.toString(16)
-		})
-	}
-
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		setIsSubmitting(true)
@@ -117,7 +110,7 @@ export default function OnboardingPage() {
 		}
 
 		setTimeout(() => {
-			const requestCode = generateUUID()
+			const requestCode = uuidv4()
 			setSuccessData({
 				requestCode,
 				name: formData.name,

@@ -1,8 +1,7 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { AccountType } from '@/types/account'
-import accountsData from '@/data/savings-accounts.json'
 
 interface Account {
 	id: string
@@ -24,9 +23,30 @@ interface TableAccountsProps {
 }
 
 export default function TableAccounts({ searchTerm, accountTypeFilter }: TableAccountsProps) {
-	const [accounts] = useState<Account[]>(accountsData as Account[])
+	const [accounts, setAccounts] = useState<Account[]>([])
+	const [isLoading, setIsLoading] = useState(true)
 	const [sortColumn, setSortColumn] = useState<keyof Account>('accountName')
 	const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
+
+	useEffect(() => {
+		const fetchAccounts = async () => {
+			setIsLoading(true)
+			try {
+				const response = await fetch('/api/innerService/products', {
+					next: { revalidate: 60 },
+				})
+				const data = await response.json()
+				setAccounts(data as Account[])
+			} catch (error) {
+				console.error('Error fetching accounts:', error)
+				setAccounts([])
+			} finally {
+				setIsLoading(false)
+			}
+		}
+
+		fetchAccounts()
+	}, [])
 
 	const filteredAccounts = useMemo(() => {
 		return accounts.filter((account) => {
@@ -150,7 +170,16 @@ export default function TableAccounts({ searchTerm, accountTypeFilter }: TableAc
 					</tr>
 				</thead>
 				<tbody className="divide-y">
-					{sortedAccounts.length === 0 ? (
+					{isLoading ? (
+						<tr>
+							<td colSpan={5} className="text-main-bg px-6 py-12 text-center text-sm">
+								<div className="flex flex-col items-center justify-center">
+									<div className="border-principal/30 border-t-principal h-12 w-12 animate-spin rounded-full border-4 border-t-transparent"></div>
+									<p className="mt-4 text-lg font-semibold">Cargando cuentas...</p>
+								</div>
+							</td>
+						</tr>
+					) : sortedAccounts.length === 0 ? (
 						<tr>
 							<td colSpan={5} className="text-main-bg px-6 py-12 text-center text-sm">
 								<svg
