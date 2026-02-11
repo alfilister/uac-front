@@ -63,11 +63,10 @@ export default function OnboardingForm({
 							value={formData.name}
 							onChange={(e) => onFieldChange('name', e.target.value)}
 							placeholder="Juan Pérez"
-							className={`w-full rounded-lg border px-4 py-3 text-lg transition-all duration-200 focus:ring-2 focus:outline-none ${
-								errors.name
+							className={`w-full rounded-lg border px-4 py-3 text-lg transition-all duration-200 focus:ring-2 focus:outline-none ${errors.name
 									? 'border-red-300 focus:border-red-500'
 									: 'border-gray-300 focus:border-cyan-400'
-							}`}
+								}`}
 						/>
 						{dirty.name && errors.name && (
 							<p className="mt-2 text-sm text-red-600">{errors.name}</p>
@@ -91,11 +90,10 @@ export default function OnboardingForm({
 								onFieldChange('document', value)
 							}}
 							placeholder="123456789"
-							className={`w-full rounded-lg border px-4 py-3 text-lg transition-all duration-200 focus:ring-2 focus:outline-none ${
-								errors.document
+							className={`w-full rounded-lg border px-4 py-3 text-lg transition-all duration-200 focus:ring-2 focus:outline-none ${errors.document
 									? 'border-red-300 focus:border-red-500'
 									: 'border-gray-300 focus:border-cyan-400'
-							}`}
+								}`}
 						/>
 						{dirty.document && errors.document && (
 							<p className="mt-2 text-sm text-red-600">{errors.document}</p>
@@ -116,11 +114,10 @@ export default function OnboardingForm({
 							value={formData.email}
 							onChange={(e) => onFieldChange('email', e.target.value)}
 							placeholder="juan@ejemplo.com"
-							className={`w-full rounded-lg border px-4 py-3 text-lg transition-all duration-200 focus:ring-2 focus:outline-none ${
-								errors.email
+							className={`w-full rounded-lg border px-4 py-3 text-lg transition-all duration-200 focus:ring-2 focus:outline-none ${errors.email
 									? 'border-red-300 focus:border-red-500'
 									: 'border-gray-300 focus:border-cyan-400'
-							}`}
+								}`}
 						/>
 						{dirty.email && errors.email && (
 							<p className="mt-2 text-sm text-red-600">{errors.email}</p>
@@ -133,22 +130,20 @@ export default function OnboardingForm({
 							<span className="text-red-500">*</span>
 						</label>
 						<div
-							className={`rounded-lg border-2 p-4 transition-all ${
-								formData.recaptchaToken === 'OK'
+							className={`rounded-lg border-2 p-4 transition-all ${formData.recaptchaToken === 'OK'
 									? 'border-emerald-400 bg-emerald-50/30'
 									: errors.recaptcha
 										? 'border-red-300 bg-red-50/30'
 										: 'border-gray-300 bg-white'
-							}`}
+								}`}
 						>
 							<div className="flex items-center justify-between">
 								<div className="flex items-center gap-3">
 									<div
-										className={`flex h-10 w-10 items-center justify-center rounded-full ${
-											formData.recaptchaToken === 'OK'
+										className={`flex h-10 w-10 items-center justify-center rounded-full ${formData.recaptchaToken === 'OK'
 												? 'bg-emerald-500/10'
 												: 'bg-secondary/10'
-										}`}
+											}`}
 									>
 										{formData.recaptchaToken === 'OK' ? (
 											<CheckCircleIcon className="h-6 w-6 text-emerald-500" />
@@ -160,7 +155,7 @@ export default function OnboardingForm({
 										<p className="text-sm font-medium text-slate-700">
 											{formData.recaptchaToken === 'OK'
 												? 'Verificación completada'
-												: 'reCAPTCHA (Simulado)'}
+												: 'reCAPTCHA (Simulado tasa de aceptación de 70%)'}
 										</p>
 										<p className="text-xs text-gray-500">
 											{formData.recaptchaToken === 'OK'
