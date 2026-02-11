@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import { AccountType } from '@/types/account'
 import accountsData from '@/data/savings-accounts.json'
 
 interface Account {
@@ -84,45 +85,65 @@ export default function TableAccounts({ searchTerm, accountTypeFilter }: TableAc
 		return requirements.join(' • ')
 	}
 
+	const getAccountTypeStyles = (accountType: AccountType | string) => {
+		switch (accountType) {
+			case AccountType.REGULAR:
+				return 'bg-principal/10 text-principal'
+			case AccountType.YOUTH:
+				return 'bg-cyan-500/10 text-cyan-600'
+			case AccountType.BUSINESS:
+				return 'bg-emerald-500/10 text-emerald-600'
+			case AccountType.PREMIUM:
+				return 'bg-blue-500/10 text-blue-600'
+			default:
+				return 'bg-gray-500/10 text-gray-600'
+		}
+	}
+
 	const SortIcon = ({ direction }: { direction: 'asc' | 'desc' | null }) => {
 		if (direction === null) return <span className="ml-2 text-gray-400">⇅</span>
 		return direction === 'asc' ? (
-			<span className="ml-2" style={{ color: 'var(--principal)' }}>
-				↑
-			</span>
+			<span className="text-principal ml-2">↑</span>
 		) : (
-			<span className="ml-2" style={{ color: 'var(--principal)' }}>
-				↓
-			</span>
+			<span className="text-principal ml-2">↓</span>
 		)
 	}
 
 	return (
-		<div
-			className="overflow-x-auto rounded-lg shadow-lg"
-			style={{ border: '1px solid var(--mainBg)' }}
-		>
+		<div className="border-main-bg overflow-x-auto rounded-lg border shadow-lg">
 			<table className="min-w-full divide-y bg-white">
-				<thead style={{ background: 'linear-gradient(to right, var(--mainBg), #3d4e6a)' }}>
+				<thead className="from-main-bg bg-linear-to-r to-[#3d4e6a]">
 					<tr>
 						{[
-							{ key: 'accountName', label: 'Nombre de Cuenta' },
-							{ key: 'accountType', label: 'Tipo de Cuenta' },
-							{ key: 'balance', label: 'Balance' },
-							{ key: 'interestRate', label: 'Tasa de Interés' },
-							{ key: 'minDeposit', label: 'Requisitos' },
+							{ key: 'accountName', label: 'Nombre de Cuenta', sortable: true },
+							{ key: 'accountType', label: 'Tipo de Cuenta', sortable: false },
+							{ key: 'balance', label: 'Balance', sortable: true },
+							{ key: 'interestRate', label: 'Tasa de Interés', sortable: true },
+							{ key: 'minDeposit', label: 'Requisitos', sortable: false },
 						].map((column) => (
 							<th
 								key={column.key}
 								scope="col"
-								className="cursor-pointer px-6 py-4 text-left text-xs font-bold tracking-wider text-white uppercase transition-colors duration-200 hover:bg-black/10"
-								onClick={() => handleSort(column.key as keyof Account)}
+								className={`${
+									column.sortable
+										? 'cursor-pointer hover:bg-black/10'
+										: 'cursor-default'
+								} px-6 py-4 text-left text-xs font-bold tracking-wider text-white uppercase transition-colors duration-200`}
+								onClick={
+									column.sortable
+										? () => handleSort(column.key as keyof Account)
+										: undefined
+								}
 							>
 								<div className="flex items-center">
 									{column.label}
-									<SortIcon
-										direction={sortColumn === column.key ? sortDirection : null}
-									/>
+									{column.sortable && (
+										<SortIcon
+											direction={
+												sortColumn === column.key ? sortDirection : null
+											}
+										/>
+									)}
 								</div>
 							</th>
 						))}
@@ -131,14 +152,9 @@ export default function TableAccounts({ searchTerm, accountTypeFilter }: TableAc
 				<tbody className="divide-y">
 					{sortedAccounts.length === 0 ? (
 						<tr>
-							<td
-								colSpan={5}
-								className="px-6 py-12 text-center text-sm"
-								style={{ color: 'var(--mainBg)' }}
-							>
+							<td colSpan={5} className="text-main-bg px-6 py-12 text-center text-sm">
 								<svg
-									className="mx-auto h-12 w-12"
-									style={{ color: 'var(--principal)', opacity: 0.5 }}
+									className="text-principal/50 mx-auto h-12 w-12"
 									fill="none"
 									viewBox="0 0 24 24"
 									stroke="currentColor"
@@ -162,45 +178,29 @@ export default function TableAccounts({ searchTerm, accountTypeFilter }: TableAc
 						sortedAccounts.map((account, index) => (
 							<tr
 								key={account.id}
-								className="transition-colors duration-150 hover:bg-[rgba(67,199,210,0.05)]"
-								style={{
-									backgroundColor:
-										index % 2 !== 0 ? 'rgba(50, 64, 88, 0.03)' : undefined,
-								}}
+								className={`hover:bg-secondary/10 transition-colors duration-150 ${
+									index % 2 !== 0 ? 'bg-main-bg/5' : ''
+								}`}
 							>
-								<td
-									className="px-6 py-4 text-sm font-semibold"
-									style={{ color: 'var(--mainBg)' }}
-								>
+								<td className="text-main-bg px-6 py-4 text-sm font-semibold">
 									{account.accountName}
 								</td>
 								<td className="px-6 py-4 text-sm">
 									<span
-										className="inline-flex rounded-full px-3 py-1 text-center text-xs font-semibold"
-										style={{
-											backgroundColor: 'rgba(235, 134, 25, 0.12)',
-											color: 'var(--principal)',
-										}}
+										className={`inline-flex rounded-full px-3 py-1 text-center text-xs font-semibold ${getAccountTypeStyles(
+											account.accountType,
+										)}`}
 									>
 										{account.accountType}
 									</span>
 								</td>
-								<td
-									className="px-6 py-4 text-sm font-semibold whitespace-nowrap"
-									style={{ color: 'var(--mainBg)' }}
-								>
+								<td className="text-main-bg px-6 py-4 text-sm font-semibold whitespace-nowrap">
 									{formatCurrency(account.balance)}
 								</td>
-								<td
-									className="px-6 py-4 text-sm whitespace-nowrap"
-									style={{ color: 'var(--mainBg)' }}
-								>
+								<td className="text-main-bg px-6 py-4 text-sm whitespace-nowrap">
 									{account.interestRate}%
 								</td>
-								<td
-									className="px-6 py-4 text-xs"
-									style={{ color: 'var(--mainBg)' }}
-								>
+								<td className="text-main-bg px-6 py-4 text-xs">
 									{getRequirements(account)}
 								</td>
 							</tr>

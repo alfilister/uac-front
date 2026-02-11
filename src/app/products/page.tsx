@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { ExclamationCircleIcon } from '@heroicons/react/24/outline'
+import Navbar from '@/components/Navbar'
 import TableAccounts from '@/components/products/TableAccounts'
 import Filters from '@/components/products/Filters'
 import StatsCards from '@/components/products/StatsCards'
@@ -17,6 +18,7 @@ export default function ProductsPage() {
 				background: 'linear-gradient(to bottom right, #f8fafc, #f1f5f9)',
 			}}
 		>
+			<Navbar />
 			<div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
 				<div className="mb-8">
 					<h1

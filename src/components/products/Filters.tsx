@@ -1,22 +1,12 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { ACCOUNT_TYPE_OPTIONS } from '@/types/account'
 
 interface FiltersProps {
 	onSearchChange: (term: string) => void
 	onTypeChange: (type: string) => void
 }
-
-const ACCOUNT_TYPES = [
-	{ value: 'all', label: 'Todos los Tipos de Cuenta' },
-	{ value: 'Cuenta de Ahorro Regular', label: 'Cuenta de Ahorro Regular' },
-	{ value: 'Cuenta de Ahorro Premium', label: 'Cuenta de Ahorro Premium' },
-	{ value: 'Cuenta Joven', label: 'Cuenta Joven' },
-	{
-		value: 'Cuenta de Ahorro Empresarial',
-		label: 'Cuenta de Ahorro Empresarial',
-	},
-]
 
 export default function Filters({ onSearchChange, onTypeChange }: FiltersProps) {
 	const [searchTerm, setSearchTerm] = useState('')
@@ -37,17 +27,13 @@ export default function Filters({ onSearchChange, onTypeChange }: FiltersProps) 
 	}
 
 	return (
-		<div
-			className="mb-6 rounded-lg border p-6 shadow-md"
-			style={{ backgroundColor: 'white', borderColor: 'rgba(50, 64, 88, 0.2)' }}
-		>
+		<div className="border-main-bg/20 mb-6 rounded-lg border bg-white p-6 shadow-md">
 			<div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
 				{/* Search Input */}
 				<div className="flex-1">
 					<label
 						htmlFor="search"
-						className="mb-2 block text-sm font-semibold"
-						style={{ color: 'var(--mainBg)' }}
+						className="text-main-bg mb-2 block text-sm font-semibold"
 					>
 						Buscar Cuentas
 					</label>
@@ -58,21 +44,11 @@ export default function Filters({ onSearchChange, onTypeChange }: FiltersProps) 
 							placeholder="Buscar por nombre de cuenta..."
 							value={searchTerm}
 							onChange={(e) => setSearchTerm(e.target.value)}
-							className="w-full rounded-lg border bg-white px-4 py-3 pr-4 pl-11 text-gray-900 placeholder-gray-400 shadow-sm transition-all duration-200 focus:ring-2 focus:ring-[rgba(67,199,210,0.2)] focus:outline-none"
-							style={{
-								borderColor: 'rgba(50, 64, 88, 0.3)',
-							}}
-							onFocus={(e) =>
-								(e.currentTarget.style.borderColor = 'var(--secondary)')
-							}
-							onBlur={(e) =>
-								(e.currentTarget.style.borderColor = 'rgba(50, 64, 88, 0.3)')
-							}
+							className="border-main-bg/30 focus:border-secondary focus:ring-secondary/20 w-full rounded-lg border bg-white px-4 py-3 pr-4 pl-11 text-gray-900 placeholder-gray-400 shadow-sm transition-all duration-200 focus:ring-2 focus:outline-none"
 						/>
 						<div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5">
 							<svg
-								className="h-5 w-5"
-								style={{ color: 'var(--principal)' }}
+								className="text-principal h-5 w-5"
 								fill="none"
 								viewBox="0 0 24 24"
 								stroke="currentColor"
@@ -92,8 +68,7 @@ export default function Filters({ onSearchChange, onTypeChange }: FiltersProps) 
 				<div className="w-full md:w-80">
 					<label
 						htmlFor="accountType"
-						className="mb-2 block text-sm font-semibold"
-						style={{ color: 'var(--mainBg)' }}
+						className="text-main-bg mb-2 block text-sm font-semibold"
 					>
 						Tipo de Cuenta
 					</label>
@@ -102,18 +77,9 @@ export default function Filters({ onSearchChange, onTypeChange }: FiltersProps) 
 							id="accountType"
 							value={accountType}
 							onChange={(e) => handleTypeChange(e.target.value)}
-							className="w-full appearance-none rounded-lg border bg-white px-4 py-3 pr-10 text-gray-900 shadow-sm transition-all duration-200 focus:ring-2 focus:outline-none"
-							style={{
-								borderColor: 'rgba(50, 64, 88, 0.3)',
-							}}
-							onFocus={(e) =>
-								(e.currentTarget.style.borderColor = 'var(--secondary)')
-							}
-							onBlur={(e) =>
-								(e.currentTarget.style.borderColor = 'rgba(50, 64, 88, 0.3)')
-							}
+							className="border-main-bg/30 focus:border-secondary w-full appearance-none rounded-lg border bg-white px-4 py-3 pr-10 text-gray-900 shadow-sm transition-all duration-200 focus:ring-2 focus:outline-none"
 						>
-							{ACCOUNT_TYPES.map((type) => (
+							{ACCOUNT_TYPE_OPTIONS.map((type) => (
 								<option key={type.value} value={type.value}>
 									{type.label}
 								</option>
@@ -121,8 +87,7 @@ export default function Filters({ onSearchChange, onTypeChange }: FiltersProps) 
 						</select>
 						<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
 							<svg
-								className="h-5 w-5"
-								style={{ color: 'var(--principal)' }}
+								className="text-principal h-5 w-5"
 								fill="none"
 								viewBox="0 0 24 24"
 								stroke="currentColor"
@@ -139,34 +104,16 @@ export default function Filters({ onSearchChange, onTypeChange }: FiltersProps) 
 				</div>
 			</div>
 
-			{/* Active Filters Display */}
 			{(searchTerm || accountType !== 'all') && (
-				<div
-					className="mt-4 flex flex-wrap items-center gap-2 border-t pt-4"
-					style={{ borderColor: 'rgba(50, 64, 88, 0.2)' }}
-				>
-					<span className="text-sm font-medium" style={{ color: 'var(--mainBg)' }}>
-						Filtros activos:
-					</span>
+				<div className="border-main-bg/20 mt-4 flex flex-wrap items-center gap-2 border-t pt-4">
+					<span className="text-main-bg text-sm font-medium">Filtros activos:</span>
 					{searchTerm && (
-						<span
-							className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold"
-							style={{
-								backgroundColor: 'rgba(235, 134, 25, 0.12)',
-								color: 'var(--principal)',
-							}}
-						>
+						<span className="bg-principal/10 text-principal inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold">
 							Búsqueda: &quot;{searchTerm}&quot;
 						</span>
 					)}
 					{accountType !== 'all' && (
-						<span
-							className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold"
-							style={{
-								backgroundColor: 'rgba(67, 199, 210, 0.12)',
-								color: 'var(--secondary)',
-							}}
-						>
+						<span className="bg-secondary/10 text-secondary inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold">
 							Tipo: {accountType}
 						</span>
 					)}
@@ -177,10 +124,7 @@ export default function Filters({ onSearchChange, onTypeChange }: FiltersProps) 
 							onSearchChange('')
 							onTypeChange('all')
 						}}
-						className="ml-2 text-sm font-medium transition-colors duration-200"
-						style={{ color: 'var(--principal)' }}
-						onMouseEnter={(e) => (e.currentTarget.style.color = '#d97a15')}
-						onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--principal)')}
+						className="text-principal hover:text-principal/80 ml-2 text-sm font-medium transition-colors duration-200"
 					>
 						Limpiar todos
 					</button>
